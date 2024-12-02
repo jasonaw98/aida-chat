@@ -5,11 +5,13 @@ import {
   UserRoundIcon,
 } from "lucide-react";
 import { TabsTrigger, TabsList } from "./ui/tabs";
+import { AdsSection } from "./AdsSection";
 
 const TabListNav = () => {
   return (
     <div className="w-full">
-      <TabsList className="flex justify-evenly h-full">
+      <div className=""><AdsSection/></div>
+      <TabsList className="flex justify-evenly h-full pb-3">
         <TabsTrigger value="chats">
           <div className="flex flex-col items-center">
             <MessageCircleMoreIcon />
