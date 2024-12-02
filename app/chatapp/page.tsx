@@ -1,11 +1,12 @@
+import EmbedPage from "@/components/EmbedGradio";
 import Chats from "@/components/pages/Chats";
 import { TabsContent } from "@/components/ui/tabs";
 import React from "react";
 
 const page = () => {
   return (
-    <div className="flex">
-      <div className="flex w-full">
+    <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <TabsContent value="chats" className="flex w-full">
           <Chats/>
         </TabsContent>
@@ -14,7 +15,7 @@ const page = () => {
           Messages
         </TabsContent>
         <TabsContent value="AI" className="">
-          Messages
+          <EmbedPage />
         </TabsContent>
         <TabsContent value="profile" className="">
           Messages
