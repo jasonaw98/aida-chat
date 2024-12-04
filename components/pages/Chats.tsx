@@ -2,28 +2,22 @@ import ChatListCard from "../ChatListCard";
 
 const ChatData = [
   {
-    name: "Julia Howangle",
+    name: "AIDA",
     time: "10:00PM",
-    received_message: "Hello",
+    received_message: "Hello how can I help you?",
     sent_message: "",
   },
   {
-    name: "Julia Howangle",
+    name: "Mahsuri",
     time: "10:00PM",
     received_message: "",
     sent_message: "Hi",
   },
   {
-    name: "Julia Howangle",
+    name: "Abbie",
     time: "10:00PM",
     received_message: "Hello",
     sent_message: "",
-  },
-  {
-    name: "Julia Howangle",
-    time: "10:00PM",
-    received_message: "",
-    sent_message: "Hi",
   },
 ];
 
