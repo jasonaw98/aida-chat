@@ -10,8 +10,11 @@ import { AdsSection } from "./AdsSection";
 const TabListNav = () => {
   return (
     <div className="w-full">
-      <div className=""><AdsSection/></div>
-      <TabsList className="flex justify-evenly h-full pb-3">
+      <div className="">
+        <AdsSection />
+      </div>
+
+      <TabsList className="flex justify-evenly h-fit pb-3">
         <TabsTrigger value="chats">
           <div className="flex flex-col items-center">
             <MessageCircleMoreIcon />
@@ -27,7 +30,7 @@ const TabListNav = () => {
         <TabsTrigger value="AI">
           <div className="flex flex-col items-center">
             <BrainIcon />
-            <p>AI</p>
+            <p>Trusted AI</p>
           </div>
         </TabsTrigger>
         <TabsTrigger value="profile">

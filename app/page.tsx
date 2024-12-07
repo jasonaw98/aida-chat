@@ -1,44 +1,46 @@
 import Image from "next/image";
-import { cn } from "@/lib/utils";
-import GridPattern from "@/components/ui/grid-pattern";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between pt-12">
-      <div className="relative flex flex-col h-[90vh] items-center justify-center overflow-hidden rounded-lg bg-background px-8 pb-36 md:shadow-xl">
-        <GridPattern
-          width={50}
-          height={50}
-          x={-2}
-          y={-1}
-          className={cn(
-            "[mask-image:linear-gradient(to_bottom,transparent,white,transparent)] absolute inset-0 z-auto"
-          )}
+    <main className="flex flex-col items-center justify-center bg-[linear-gradient(120deg,_#89f7fe_0%,_#66a6ff_100%)] h-full">
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-4xl font-black text-center text-zinc-700 drop-shadow-lg">
+          Welcome to
+        </h1>
+        <h1 className="text-4xl font-black text-center text-zinc-700 drop-shadow-lg">
+          IDRead Messenger
+        </h1>
+        <p className="text-sm text-blue-500 font-bold mt-5">Personal</p>
+        <Image
+          src="/aidaicon.png"
+          alt="AIDA Icon"
+          width={120}
+          height={120}
+          className="md:mt-8 rounded-2xl object-cover shadow-xl"
         />
-        <div className="flex flex-col items-center justify-center relative z-20">
-          <h1 className="text-4xl font-black text-center text-neutral-700 ">
-            IDRead Messenger
-          </h1>
-          <p className="text-sm text-blue-500 font-bold mt-5">Personal</p>
-          <Image
-            src="/aidaicon.png"
-            alt="AIDA Icon"
-            width={100}
-            height={100}
-            className="mt-8"
-          />
-          <Link href="/sign-in" className="cursor-pointer">
-            <button className="mt-10 bg-gradient-to-b from-gray-500 via-black to-gray-900 text-white py-3 w-52 rounded-xl font-bold">
-              Sign In
-            </button>
-          </Link>
-          <Link href="/sign-up">
-            <button className="mt-5 bg-gradient-to-b from-blue-400 via-blue-600 to-blue-700 text-white py-3 w-52 rounded-xl font-bold">
-              Sign Up
-            </button>
-          </Link>
-        </div>
+        <Link href="/sign-in" className="cursor-pointer">
+          <Button className="mt-10 text-white font-bold bg-[#14171a] hover:bg-[#14171a]/90 w-52">
+            Sign In
+          </Button>
+        </Link>
+        <Link href="/sign-up">
+          <Button className="mt-5 bg-[#1877f2] text-white font-bold hover:bg-[#1877f2]/90 w-52">
+            Sign Up
+          </Button>
+        </Link>
+        <h1 className="text-base pt-12 font-black text-center text-neutral-800 drop-shadow-lg">
+          <Link href="/chatapp">Gateway towards the future of Messaging</Link>
+        </h1>
+
+        <Image
+          src="/blockchain.gif"
+          alt="Blokchain Icon"
+          width={100}
+          height={100}
+          className="mt-8 rounded-2xl shadow-xl"
+        />
       </div>
     </main>
   );

@@ -3,89 +3,45 @@ import Marquee from "./ui/marquee";
 
 const reviews = [
   {
-    name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://avatar.vercel.sh/jack",
+    body: "Pamiran Kereta EV di...",
   },
   {
-    name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://avatar.vercel.sh/jill",
+    body: "Bazaar kereta EV di...",
   },
   {
-    name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john",
+    body: "Pamiran Kereta EV di...",
   },
   {
-    name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
-  },
-  {
-    name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
-  },
-  {
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
+    body: "Pamiran Kereta EV di...",
   },
 ];
 
 const firstRow = reviews.slice(0, reviews.length / 2);
-// const secondRow = reviews.slice(reviews.length / 2);
 
-const ReviewCard = ({
-//   img,
-//   name,
-//   username,
-  body,
-}: {
-  img: string;
-  name: string;
-  username: string;
-  body: string;
-}) => {
+const ReviewCard = ({ body }: { body: string }) => {
   return (
     <figure
       className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
-        "bg-blue-300",
-        "flex flex-row items-center gap-2",
+        "relative w-64 cursor-pointer overflow-hidden rounded-xl border",
+        "bg-[linear-gradient(to_right,_#96fbc4_0%,_#f9f586_100%)]",
+        "flex flex-row items-center justify-center"
         // light styles
         // "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // dark styles
         // "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
       )}
     >
-      <div className="flex flex-row items-center gap-2">
-        {/* <img className="rounded-full" width="32" height="32" alt="" src={img} /> */}
-        <div className="flex flex-col items-center justify-center text-center">
-          {/* <figcaption className="text-sm font-medium dark:text-white">
-            {name}
-          </figcaption> */}
-          {/* <p className="text-xs font-medium dark:text-white/40">{username}</p> */}
-        </div>
-      </div>
-      <blockquote className="mt-2 text-sm">{body}</blockquote>
+      <blockquote className="text-xl font-bold text-center">{body}</blockquote>
     </figure>
   );
 };
 
 export function AdsSection() {
   return (
-    <div className="relative flex h-[100px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border md:shadow-xl">
+    <div className="relative flex h-[70px] w-full justify-center overflow-hidden rounded-lg border md:shadow-xl">
       <Marquee pauseOnHover className="[--duration:20s]">
-        {firstRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
+        {firstRow.map((review, i) => (
+          <ReviewCard key={i} {...review} />
         ))}
       </Marquee>
       {/* <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div> */}

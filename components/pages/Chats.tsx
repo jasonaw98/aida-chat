@@ -25,7 +25,7 @@ const Chats = () => {
   return (
     <div className="flex flex-col w-full">
       <div className="flex w-full px-8">
-        <p className="font-semibold text-2xl px-3 py-1 rounded-full">All Chats</p>
+        <p className="font-bold text-2xl px-3 py-1 rounded-full">Demo</p>
       </div>
       {ChatData.map((data, index) => (
         <ChatListCard
