@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface ChatListCardProps {
   name: string;
@@ -15,10 +16,13 @@ const ChatListCard = ({
 }: ChatListCardProps) => {
   return (
     <div className="flex flex-col w-full">
-      <div className="flex px-8 py-3 w-full">
-        <p className="font-black size-12 rounded-full bg-violet-300 flex justify-center items-center">
-          A
-        </p>
+      <div className="flex px-8 py-4 w-full items-center">
+        <Avatar>
+          <AvatarImage
+            src={`https://api.dicebear.com/6.x/initials/svg?seed=${name}`}
+          />
+          <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+        </Avatar>
         <div className="flex flex-col ml-8">
           <h1 className="font-bold text-lg">{name}</h1>
           <p
@@ -38,7 +42,7 @@ const ChatListCard = ({
             {sent_message}
           </p>
         </div>
-        <div className="flex flex-col gap-2 items-center ml-auto">
+        <div className="flex flex-col gap-2 items-center ml-auto h-full">
           <p className="text-sm font-semibold text-neutral-200">{time}</p>
           <p
             className={cn(
