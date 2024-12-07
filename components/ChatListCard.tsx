@@ -15,11 +15,11 @@ const ChatListCard = ({
 }: ChatListCardProps) => {
   return (
     <div className="flex flex-col w-full">
-      <div className="flex px-8 py-3 w-full justify-between">
+      <div className="flex px-8 py-3 w-full">
         <p className="font-black size-12 rounded-full bg-purple-300 flex justify-center items-center">
-          J
+          A
         </p>
-        <div className="flex flex-col">
+        <div className="flex flex-col ml-8">
           <h1 className="font-bold text-lg">{name}</h1>
           <p
             className={cn(
@@ -38,7 +38,7 @@ const ChatListCard = ({
             {sent_message}
           </p>
         </div>
-        <div className="flex flex-col gap-2 items-center">
+        <div className="flex flex-col gap-2 items-center ml-auto">
           <p className="text-sm">{time}</p>
           <p
             className={cn(
