@@ -8,7 +8,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <main className="bg-slate-200 flex flex-col h-full">
+    <main className="bg-background flex flex-col h-full">
       <Tabs defaultValue="chats" className="flex flex-col h-full justify-between">
         {children}
         <TabListNav />
