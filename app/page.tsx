@@ -1,17 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { TextAnimate } from "@/components/ui/text-animate";
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center h-full">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-black text-center text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-500 mb-2">
+        {/* <h1 className="text-4xl font-black text-center text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-500 mb-2">
           Welcome to
-        </h1>
-        <h1 className="text-3xl font-black text-center text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-500">
+        </h1> */}
+        {/* <h1 className="text-3xl font-black text-center text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-500">
           IDRead AI Messenger
-        </h1>
+        </h1> */}
+        <div className="flex flex-col items-center justify-center gap-3">
+          <TextAnimate
+            text="Welcome To"
+            type="popIn"
+            className="text-3xl"
+          />
+          <TextAnimate
+            text="IDRead AI Messenger"
+            type="popIn"
+            className="text-3xl"
+          />
+        </div>
         <p className="text-sm text-blue-500 font-bold my-3">Personal</p>
         <Image
           src="/aidaicon.png"
@@ -28,8 +41,8 @@ export default function Home() {
             Sign Up
           </Button>
         </Link>
-        <h1 className="text-sm py-8 font-black text-center text-transparent bg-clip-text bg-gradient-to-br from-[#2af598] to-[#009efd] drop-shadow-lg">
-          <Link href="/chatapp">Gateway towards the future of Messaging</Link>
+        <h1 className="text-base py-8 font-black text-center text-transparent bg-clip-text bg-gradient-to-br from-[#2af598] to-[#009efd] drop-shadow-lg">
+          <Link href="/chatapp">AI-powered messaging platform</Link>
         </h1>
 
         <Image
