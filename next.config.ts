@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
   devIndicators: {
     buildActivity: false,
     appIsrStatus: false,
-  }
+  },
+  images: {
+    domains: ["img.clerk.com"],
+  },
 };
 
 export default nextConfig;
