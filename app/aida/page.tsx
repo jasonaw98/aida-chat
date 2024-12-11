@@ -112,7 +112,7 @@ export default function ChatPage() {
         </p>
       </CardHeader>
       <CardContent className="overflow-auto h-[calc(100%-9rem)]">
-        <ScrollArea className="h-full">
+        <div className="h-full">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div
@@ -122,7 +122,7 @@ export default function ChatPage() {
                 }`}
               >
                 <div
-                  className={`max-w-[65%] rounded-lg p-2 container overflow-none ${
+                  className={`max-w-[75%] rounded-lg p-2 overflow-auto ${
                     message.role === "user"
                       ? "bg-blue-500 text-white flex justify-end w-fit"
                       : "bg-gray-700 text-gray-100 break-words"
@@ -191,9 +191,9 @@ export default function ChatPage() {
               AIDA is typing...
             </div>
           )}
-        </ScrollArea>
+        </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="mt-4">
         <form onSubmit={handleSubmit} className="flex w-full space-x-2">
           <Input
             value={input}
