@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Viewport } from 'next'
+import LoadingScreen from "@/components/LoadingScreen";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -65,11 +66,12 @@ export default function RootLayout({
         <Script
           defer
           src="https://umami-analytics-gules.vercel.app/script.js"
-          data-website-id="fe6e4139-17cc-4ae2-8813-49f5f99b79fa"
+          // data-website-id="fe6e4139-17cc-4ae2-8813-49f5f99b79fa"
         />
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}
         >
+          <LoadingScreen />
           {children}
         </body>
       </html>
