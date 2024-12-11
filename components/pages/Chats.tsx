@@ -1,21 +1,22 @@
 import Link from "next/link";
 import ChatListCard from "../ChatListCard";
+import ShineBorder from "../ui/shine-border";
 
 const ChatData = [
   {
-    name: "AIDA",
+    name: "John Doe",
     time: "10:00PM",
     received_message: "Hello how can I help you?",
     sent_message: "",
   },
   {
-    name: "Mahsuri",
+    name: "Jane Doe",
     time: "10:00PM",
     received_message: "",
     sent_message: "Hi",
   },
   {
-    name: "Abbie",
+    name: "Jeff Doe",
     time: "10:00PM",
     received_message: "Hello",
     sent_message: "",
@@ -25,8 +26,23 @@ const ChatData = [
 const Chats = () => {
   return (
     <div className="flex flex-col w-full">
-      <div className="flex w-full px-8">
-        <p className="font-bold text-2xl">Chats</p>
+      <div className="flex gap-4 w-full px-8 py-4">
+        <Link href="/aida" className="w-full cursor-pointer">
+          <ShineBorder
+            className="font-bold text-lg border py-3 w-full rounded-xl shadow-inner shadow-white/20"
+            color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+          >
+            AIDA
+          </ShineBorder>
+        </Link>
+        <Link href="/mahsuri" className="w-full cursor-pointer">
+          <ShineBorder
+            className="font-bold text-lg border py-3 w-full rounded-xl shadow-inner shadow-white/20"
+            color={["#37ecb9cb", "#0061fd", "#37ecb9cb"]}
+          >
+            Mahsuri
+          </ShineBorder>
+        </Link>
       </div>
       {ChatData.map((data, index) => (
         <Link href={`/chat/${data.name}`} key={index}>

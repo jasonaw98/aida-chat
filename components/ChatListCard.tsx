@@ -16,6 +16,7 @@ const ChatListCard = ({
 }: ChatListCardProps) => {
   return (
     <div className="flex flex-col w-full">
+      <span className="w-full h-px bg-gray-800"></span>
       <div className="flex px-8 py-4 w-full items-center">
         <Avatar>
           <AvatarImage

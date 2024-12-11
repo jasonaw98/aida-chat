@@ -41,7 +41,7 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
   };
 
   return (
-    <Card className="h-[calc(100vh-2rem)] dark:bg-gray-800">
+    <Card className="h-[calc(100vh-2rem)] border-0">
       <CardHeader className="flex flex-row items-center space-x-4 pb-4">
         <Link href="/chatapp" className="cursor-pointer">
             <ChevronLeftIcon className="w-6 h-6" />
