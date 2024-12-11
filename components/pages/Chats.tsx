@@ -29,7 +29,7 @@ const Chats = () => {
       <div className="flex gap-4 w-full px-8 py-4">
         <Link href="/aida" className="w-full cursor-pointer">
           <ShineBorder
-            className="font-bold text-lg border py-3 w-full rounded-xl shadow-inner shadow-white/20"
+            className="font-bold text-lg border py-3 w-full rounded-xl shadow-inner shadow-white/20 text-center"
             color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
           >
             AIDA
@@ -37,7 +37,7 @@ const Chats = () => {
         </Link>
         <Link href="/mahsuri" className="w-full cursor-pointer">
           <ShineBorder
-            className="font-bold text-lg border py-3 w-full rounded-xl shadow-inner shadow-white/20"
+            className="font-bold text-lg border py-3 w-full rounded-xl shadow-inner shadow-white/20 text-center"
             color={["#37ecb9cb", "#0061fd", "#37ecb9cb"]}
           >
             Mahsuri
