@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ChatListCard from "../ChatListCard";
 import ShineBorder from "../ui/shine-border";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const ChatData = [
   {
@@ -26,7 +27,7 @@ const ChatData = [
 const Chats = () => {
   return (
     <div className="flex flex-col w-full">
-      <div className="flex gap-4 w-full px-8 py-4">
+      {/* <div className="flex gap-4 w-full px-8 py-4">
         <Link href="/aida" className="w-full cursor-pointer">
           <ShineBorder
             className="font-bold text-lg border py-3 w-full rounded-xl shadow-inner shadow-white/20 text-center"
@@ -43,7 +44,40 @@ const Chats = () => {
             Mahsuri
           </ShineBorder>
         </Link>
-      </div>
+      </div> */}
+
+      <Link href="/aida" className="flex flex-col w-full">
+        <span className="w-full h-px bg-gray-800"></span>
+        <div className="flex px-8 py-4 w-full items-center">
+          <Avatar>
+            <AvatarImage
+              src={`https://api.dicebear.com/6.x/initials/svg?seed=AIDA`}
+            />
+            <AvatarFallback>{"AIDA".charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col ml-8">
+            <h1 className="font-bold text-lg">AIDA</h1>
+          </div>
+        </div>
+        <span className="w-full h-px bg-gray-800"></span>
+      </Link>
+
+      <Link href="/mahsuri" className="flex flex-col w-full">
+        <span className="w-full h-px bg-gray-800"></span>
+        <div className="flex px-8 py-4 w-full items-center">
+          <Avatar>
+            <AvatarImage
+              src={`https://api.dicebear.com/6.x/initials/svg?seed=MAHSURI`}
+            />
+            <AvatarFallback>{"AIDA".charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col ml-8">
+            <h1 className="font-bold text-lg">MAHSURI</h1>
+          </div>
+        </div>
+        <span className="w-full h-px bg-gray-800"></span>
+      </Link>
+
       {ChatData.map((data, index) => (
         <Link href={`/chat/${data.name}`} key={index}>
           <ChatListCard

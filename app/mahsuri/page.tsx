@@ -40,7 +40,7 @@ export default function ChatPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://aida.zygy.com/stream-api/", {
+      const response = await fetch("https://llm.zygy.com/stream-api/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
