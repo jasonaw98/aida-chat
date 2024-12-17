@@ -34,17 +34,17 @@ export const Profile = async () => {
             <InfoItem
               icon={<User className="w-5 h-5" />}
               label="Username"
-              value={user.username}
+              value={user.username ?? "Anonymous"}
             />
             <InfoItem
               icon={<Mail className="w-5 h-5" />}
               label="Email"
-              value={user.emailAddresses[0].emailAddress}
+              value={user.emailAddresses[0].emailAddress ?? "Anonymous"}
             />
             <InfoItem
               icon={<Phone className="w-5 h-5" />}
               label="Phone"
-              value={user.phoneNumbers[0].phoneNumber}
+              value={user.phoneNumbers[0].phoneNumber ?? "Anonymous"}
             />
             <InfoItem
               icon={<Calendar className="w-5 h-5" />}
