@@ -34,21 +34,21 @@ export const Profile = async () => {
         <CardContent>
           {user && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <InfoItem
+              {/* <InfoItem
                 icon={<User className="w-5 h-5" />}
                 label="Username"
                 value={user?.username ?? "Anonymous"}
-              />
+              /> */}
               <InfoItem
                 icon={<Mail className="w-5 h-5" />}
                 label="Email"
                 value={user?.emailAddresses[0].emailAddress ?? "Anonymous"}
               />
-              <InfoItem
+              {/* <InfoItem
                 icon={<Phone className="w-5 h-5" />}
                 label="Phone"
                 value={user?.phoneNumbers[0].phoneNumber ?? "Anonymous"}
-              />
+              /> */}
 
               <InfoItem
                 icon={<Calendar className="w-5 h-5" />}
