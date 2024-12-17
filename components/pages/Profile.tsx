@@ -3,13 +3,13 @@ import { UserButton } from "@clerk/nextjs";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { User, Mail, Phone, Calendar } from "lucide-react";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
 export const Profile = async () => {
   const user = await currentUser();
-  if (!user) {
-    redirect("/");
-  }
+  // if (!user) {
+  //   redirect("/");
+  // }
 
   return (
     <div className="flex w-full px-4 h-[95%]">
@@ -20,6 +20,8 @@ export const Profile = async () => {
             <UserButton />
           </CardTitle>
           <div className="flex justify-center">
+            {user?.imageUrl && (
+              
             <Image
               src={user.imageUrl}
               alt="User Avatar"
@@ -27,6 +29,7 @@ export const Profile = async () => {
               height={60}
               className="rounded-full"
             />
+            )}
           </div>
         </CardHeader>
         <CardContent>
@@ -34,18 +37,20 @@ export const Profile = async () => {
             <InfoItem
               icon={<User className="w-5 h-5" />}
               label="Username"
-              value={user.username ?? "Anonymous"}
+              value={user?.username ?? "Anonymous"}
             />
             <InfoItem
               icon={<Mail className="w-5 h-5" />}
               label="Email"
-              value={user.emailAddresses[0].emailAddress ?? "Anonymous"}
+              value={user?.emailAddresses[0].emailAddress ?? "Anonymous"}
             />
             <InfoItem
               icon={<Phone className="w-5 h-5" />}
               label="Phone"
-              value={user.phoneNumbers[0].phoneNumber ?? "Anonymous"}
+              value={user?.phoneNumbers[0].phoneNumber ?? "Anonymous"}
             />
+            {user && (
+              
             <InfoItem
               icon={<Calendar className="w-5 h-5" />}
               label="Joined"
@@ -55,6 +60,7 @@ export const Profile = async () => {
                 day: "numeric",
               })}
             />
+            )}
           </div>
         </CardContent>
       </Card>
