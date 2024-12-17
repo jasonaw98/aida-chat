@@ -21,47 +21,46 @@ export const Profile = async () => {
           </CardTitle>
           <div className="flex justify-center">
             {user?.imageUrl && (
-              
-            <Image
-              src={user.imageUrl}
-              alt="User Avatar"
-              width={60}
-              height={60}
-              className="rounded-full"
-            />
+              <Image
+                src={user.imageUrl}
+                alt="User Avatar"
+                width={60}
+                height={60}
+                className="rounded-full"
+              />
             )}
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InfoItem
-              icon={<User className="w-5 h-5" />}
-              label="Username"
-              value={user?.username ?? "Anonymous"}
-            />
-            <InfoItem
-              icon={<Mail className="w-5 h-5" />}
-              label="Email"
-              value={user?.emailAddresses[0].emailAddress ?? "Anonymous"}
-            />
-            <InfoItem
-              icon={<Phone className="w-5 h-5" />}
-              label="Phone"
-              value={user?.phoneNumbers[0].phoneNumber ?? "Anonymous"}
-            />
-            {user && (
-              
-            <InfoItem
-              icon={<Calendar className="w-5 h-5" />}
-              label="Joined"
-              value={new Date(user.createdAt).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            />
-            )}
-          </div>
+          {user && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <InfoItem
+                icon={<User className="w-5 h-5" />}
+                label="Username"
+                value={user?.username ?? "Anonymous"}
+              />
+              <InfoItem
+                icon={<Mail className="w-5 h-5" />}
+                label="Email"
+                value={user?.emailAddresses[0].emailAddress ?? "Anonymous"}
+              />
+              <InfoItem
+                icon={<Phone className="w-5 h-5" />}
+                label="Phone"
+                value={user?.phoneNumbers[0].phoneNumber ?? "Anonymous"}
+              />
+
+              <InfoItem
+                icon={<Calendar className="w-5 h-5" />}
+                label="Joined"
+                value={new Date(user.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              />
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
