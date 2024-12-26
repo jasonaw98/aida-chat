@@ -5,6 +5,7 @@ import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Viewport } from 'next'
 import LoadingScreen from "@/components/LoadingScreen";
+import { AuthSync } from "@/components/AuthSync";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -69,8 +70,9 @@ export default function RootLayout({
           // data-website-id="fe6e4139-17cc-4ae2-8813-49f5f99b79fa"
         />
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}
+          className={`${geistSans.variable} ${geistMono.variable} font-sans h-full`}
         >
+          {/* <AuthSync /> */}
           <LoadingScreen />
           {children}
         </body>
