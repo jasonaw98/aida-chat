@@ -1,5 +1,5 @@
 "use client";
-import { createClient } from "@/utils/supabase/cloudserver";
+
 import { signInWithOTP, verifyOTP } from "./actions";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -12,12 +12,6 @@ import {
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 export default function LoginPage() {
-  // const supabase = await createClient();
-  // const { data } = await supabase.auth.getUser();
-
-  // if (data) {
-  //   console.log("auth", data);
-  // }
 
   const [otpSent, setotpSent] = useState(false);
   const [setOtp, setSetOtp] = useState("");
