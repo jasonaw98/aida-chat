@@ -30,6 +30,7 @@ export default function LoadingScreen() {
             fill
             style={{ objectFit: 'contain' }}
             priority
+            sizes='100'
           />
         </div>
         <p className="text-sm text-gray-600 font-bold animate-pulse">

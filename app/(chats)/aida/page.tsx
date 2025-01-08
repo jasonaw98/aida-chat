@@ -11,7 +11,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { ChevronLeftIcon } from "lucide-react";
 import Link from "next/link";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -52,6 +51,7 @@ export default function ChatPage() {
       });
 
       if (!response.ok) {
+        console.error('Fetch error:', response.status, response.statusText);
         throw new Error("Failed to fetch response");
       }
 

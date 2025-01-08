@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
-import { ClerkProvider } from "@clerk/nextjs";
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 import LoadingScreen from "@/components/LoadingScreen";
 import { AuthSync } from "@/components/AuthSync";
 
@@ -19,11 +18,11 @@ const geistMono = localFont({
 });
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-}
+};
 
 export const metadata: Metadata = {
   title: "Processing Query",
@@ -36,7 +35,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
       <html lang="en" className="h-full">
         <head>
           <meta property="og:type" content="website" />
@@ -77,6 +75,5 @@ export default function RootLayout({
           {children}
         </body>
       </html>
-    </ClerkProvider>
   );
 }

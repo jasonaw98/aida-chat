@@ -3,13 +3,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { TextAnimate } from "@/components/ui/text-animate";
 import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
+import { createClient } from "@/utils/supabase/cloudserver";
 
 export default async function Home() {
-  const { userId } = await auth();
-
-  if (userId) {
-    redirect("/chatapp");
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
+  if (data?.user) {
+    redirect('/chatapp')
   }
 
   return (
@@ -38,14 +38,9 @@ export default async function Home() {
           className="md:mt-8 rounded-2xl object-cover shadow-xl"
         />
         <div className="flex flex-col items-center justify-center gap-5 mt-10">
-          <Link href="/sign-in" className="cursor-pointer">
+          <Link href="/login" className="cursor-pointer">
             <Button className="font-bold w-52 animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1b2739,55%,#000103)] bg-[length:200%_100%] border border-slate-800">
-              Sign In
-            </Button>
-          </Link>
-          <Link href="/sign-up">
-            <Button className="font-bold animate-shimmer bg-[linear-gradient(110deg,#000103,45%,#1b2739,55%,#000103)] bg-[length:200%_100%] border border-slate-800 w-52">
-              Sign Up
+              Get Started
             </Button>
           </Link>
         </div>
