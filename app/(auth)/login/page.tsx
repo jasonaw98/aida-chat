@@ -104,7 +104,7 @@ export default function LoginPage() {
                 Verify OTP
               </Button>
             </form>
-            <Button onClick={() => setotpSent(!otpSent)}>Test</Button>
+            {/* <Button onClick={() => setotpSent(!otpSent)}>Test</Button> */}
           </div>
         </div>
       </div>
