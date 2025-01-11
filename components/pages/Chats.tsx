@@ -27,6 +27,7 @@ const ChatData = [
 const Chats = () => {
   return (
     <div className="flex flex-col w-full">
+      <h1 className="text-2xl pl-4 pb-2 text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400">Chats</h1>
       {/* <div className="flex gap-4 w-full px-8 py-4">
         <Link href="/aida" className="w-full cursor-pointer">
           <ShineBorder
@@ -78,7 +79,39 @@ const Chats = () => {
         <span className="w-full h-px bg-gray-800"></span>
       </Link>
 
-      {ChatData.map((data, index) => (
+      <Link href="/melaka" className="flex flex-col w-full">
+        <span className="w-full h-px bg-gray-800"></span>
+        <div className="flex px-8 py-4 w-full items-center">
+          <Avatar>
+            <AvatarImage
+              src={`https://api.dicebear.com/6.x/initials/svg?seed=Melaka`}
+            />
+            <AvatarFallback>{"Melaka".charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col ml-8">
+            <h1 className="font-bold text-lg">i-Melaka</h1>
+          </div>
+        </div>
+        <span className="w-full h-px bg-gray-800"></span>
+      </Link>
+
+      <Link href="/halal" className="flex flex-col w-full">
+        <span className="w-full h-px bg-gray-800"></span>
+        <div className="flex px-8 py-4 w-full items-center">
+          <Avatar>
+            <AvatarImage
+              src={`https://api.dicebear.com/6.x/initials/svg?seed=halal`}
+            />
+            <AvatarFallback>{"halal".charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col ml-8">
+            <h1 className="font-bold text-lg">i-Halal</h1>
+          </div>
+        </div>
+        <span className="w-full h-px bg-gray-800"></span>
+      </Link>
+
+      {/* {ChatData.map((data, index) => (
         <Link href={`/chat/${data.name}`} key={index}>
           <ChatListCard
             key={index}
@@ -88,7 +121,7 @@ const Chats = () => {
             sent_message={data.sent_message}
           />
         </Link>
-      ))}
+      ))} */}
     </div>
   );
 };

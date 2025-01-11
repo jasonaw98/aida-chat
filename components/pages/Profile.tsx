@@ -27,7 +27,7 @@ export const Profile = async () => {
       <div className="flex w-full px-4 h-[95%]">
         <Card className="h-full w-full shadow-inner shadow-white/20">
           <CardHeader>
-            <CardTitle className="text-xl font-bold flex justify-between -mt-2">
+            <CardTitle className="text-2xl text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400 -mt-2">
               Profile
             </CardTitle>
             <div className="flex justify-center">
