@@ -1,19 +1,16 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
-export async function createUser(
-  name: string,
-  email: string,
-  phoneNumber: string
-) {
+export async function createUser(email: string) {
   const supabase = createClient();
-  
+
   // Check if user already exists
   const { data: existingUser } = await (await supabase)
-    .from("users")
+    .from("chat_users")
     .select()
-    .eq("email", email)
+    .eq("user_email", email)
     .single();
 
   if (existingUser) {
@@ -21,13 +18,13 @@ export async function createUser(
   }
 
   // Create new user if doesn't exist
-  const { data: newUser, error } = await (await supabase)
-    .from("users")
+  const { data: newUser, error } = await (
+    await supabase
+  )
+    .from("chat_users")
     .insert([
       {
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber,
+        user_email: email,
       },
     ])
     .select()
@@ -39,6 +36,46 @@ export async function createUser(
   }
 
   return { user: newUser, error: null };
+}
+
+export async function getUserData(email: string) {
+  const supabase = createClient();
+
+  const { data } = await (await supabase)
+    .from("chat_users")
+    .select()
+    .eq("user_email", email)
+    .single();
+
+  // if (!data.phone_number) {
+  //   redirect("/signup");
+  // }
+
+  return data;
+}
+
+export async function uploadUserDetails(formData: FormData): Promise<any> {
+  const email = formData.get("email") as string;
+  const fullName = formData.get("full_name") as string;
+  const phoneNumber = formData.get("phone_number") as string;
+  const username = formData.get("username") as string;
+
+  const supabase = createClient();
+  const { data, error } = await (await supabase)
+  .from("chat_users")
+  .update({
+    full_name: fullName,
+    phone_number: phoneNumber,
+    username: username,
+  })
+  .eq("user_email", email)
+  .select()
+
+  if (error) {
+    console.error("Error fetching data:", error);
+  }
+  console.log("Updated data", data);
+  redirect("/chatapp");
 }
 
 export async function addFrens(userId: string, frenId: string) {

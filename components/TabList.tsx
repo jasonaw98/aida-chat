@@ -9,12 +9,12 @@ import { AdsSection } from "./AdsSection";
 
 const TabListNav = () => {
   return (
-    <div className="w-full pb-3">
+    <div className="w-full">
       <div className="">
         <AdsSection />
       </div>
 
-      <TabsList className="flex justify-evenly h-fit">
+      <TabsList className="flex justify-evenly h-fit pb-3">
         <TabsTrigger value="chats">
           <div className="flex flex-col items-center">
             <MessageCircleMoreIcon />

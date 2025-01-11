@@ -1,70 +1,86 @@
-import { currentUser } from "@clerk/nextjs/server";
-import { UserButton } from "@clerk/nextjs";
+import { getUser } from "@/app/(auth)/login/actions";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { User, Mail, Phone, Calendar } from "lucide-react";
 import Image from "next/image";
-// import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
+import { getUserData } from "@/app/actions/actions";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export const Profile = async () => {
-  const user = await currentUser();
-  // if (!user) {
-  //   redirect("/");
-  // }
+  const { user } = await getUser();
+  if (!user) {
+    redirect("/");
+  }
+  if (!user.email) {
+    return (
+      <div className="text-red-500 text-xl font-semibold flex flex-col items-center justify-center h-full">
+        Error: User is not Logged In
+      </div>
+    );
+  }
 
-  return (
-    <div className="flex w-full px-4 h-[95%]">
-      <Card className="h-full w-full shadow-inner shadow-white/20">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold flex justify-between -mt-2">
-            Profile
-            <UserButton />
-          </CardTitle>
-          <div className="flex justify-center">
-            {user?.imageUrl && (
-              <Image
-                src={user.imageUrl}
-                alt="User Avatar"
-                width={60}
-                height={60}
-                className="rounded-full"
-              />
-            )}
-          </div>
-        </CardHeader>
-        <CardContent>
-          {user && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* <InfoItem
-                icon={<User className="w-5 h-5" />}
-                label="Username"
-                value={user?.username ?? "Anonymous"}
-              /> */}
-              <InfoItem
-                icon={<Mail className="w-5 h-5" />}
-                label="Email"
-                value={user?.emailAddresses[0].emailAddress ?? "Anonymous"}
-              />
-              {/* <InfoItem
-                icon={<Phone className="w-5 h-5" />}
-                label="Phone"
-                value={user?.phoneNumbers[0].phoneNumber ?? "Anonymous"}
-              /> */}
+  try {
+    const userdata = await getUserData(user.email);
+    console.log("This is user data", userdata);
 
-              <InfoItem
-                icon={<Calendar className="w-5 h-5" />}
-                label="Joined"
-                value={new Date(user.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              />
+    return (
+      <div className="flex w-full px-4 h-[95%]">
+        <Card className="h-full w-full shadow-inner shadow-white/20">
+          <CardHeader>
+            <CardTitle className="text-xl font-bold flex justify-between -mt-2">
+              Profile
+            </CardTitle>
+            <div className="flex justify-center">
+              <Avatar>
+                <AvatarImage
+                  src={`https://api.dicebear.com/6.x/initials/svg?seed=${userdata.username}`}
+                />
+                <AvatarFallback>{userdata.username.charAt(0)}</AvatarFallback>
+              </Avatar>
             </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
-  );
+          </CardHeader>
+          <CardContent>
+            {user && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <InfoItem
+                  icon={<User className="w-5 h-5" />}
+                  label="Username"
+                  value={userdata.username ?? "Anonymous"}
+                />
+                <InfoItem
+                  icon={<Mail className="w-5 h-5" />}
+                  label="Email"
+                  value={user.email ?? "Anonymous"}
+                />
+                <InfoItem
+                  icon={<Phone className="w-5 h-5" />}
+                  label="Phone"
+                  value={userdata.phone_number ?? "Anonymous"}
+                />
+
+                <InfoItem
+                  icon={<Calendar className="w-5 h-5" />}
+                  label="Joined"
+                  value={new Date(user.created_at).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                />
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    );
+  } catch (error) {
+    console.error("Failed to fetch user data:", error);
+    return (
+      <div className="text-red-500 text-xl font-semibold flex flex-col items-center justify-center h-full">
+        Error: Failed to fetch user data.
+      </div>
+    );
+  }
 };
 
 function InfoItem({

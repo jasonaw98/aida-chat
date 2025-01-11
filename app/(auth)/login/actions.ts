@@ -16,7 +16,6 @@ export async function signInWithOTP(formData: FormData) {
     email: email.email,
   });
   console.log("data", data, error);
-  console.log("data success", data?.session);
 
   if (error) {
     console.log('error', error)
@@ -60,6 +59,6 @@ export async function signOut() {
 export async function getUser() {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
-  console.log("data", data, error);
+  // console.log("data", data, error);
   return data;
 }

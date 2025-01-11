@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     appIsrStatus: false,
   },
   images: {
-    domains: ["img.clerk.com"],
+    remotePatterns: [{ hostname: "https://example.com/**" }],
   },
 };
 
