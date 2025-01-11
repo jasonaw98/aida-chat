@@ -74,7 +74,7 @@ export default function LoginPage() {
                 Send OTP
               </Button>
             </form>
-            <Button onClick={() => setotpSent(!otpSent)}>Test</Button>
+            {/* <Button onClick={() => setotpSent(!otpSent)}>Test</Button> */}
           </div>
 
           <div className="flex flex-col items-center gap-8 w-1/2">
