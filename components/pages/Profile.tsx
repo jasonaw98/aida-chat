@@ -1,10 +1,11 @@
-import { getUser } from "@/app/(auth)/login/actions";
+import { getUser, signOut } from "@/app/(auth)/login/actions";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { User, Mail, Phone, Calendar } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { getUserData } from "@/app/actions/actions";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 
 export const Profile = async () => {
   const { user } = await getUser();
@@ -40,32 +41,43 @@ export const Profile = async () => {
           </CardHeader>
           <CardContent>
             {user && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <InfoItem
-                  icon={<User className="w-5 h-5" />}
-                  label="Username"
-                  value={userdata.username ?? "Anonymous"}
-                />
-                <InfoItem
-                  icon={<Mail className="w-5 h-5" />}
-                  label="Email"
-                  value={user.email ?? "Anonymous"}
-                />
-                <InfoItem
-                  icon={<Phone className="w-5 h-5" />}
-                  label="Phone"
-                  value={userdata.phone_number ?? "Anonymous"}
-                />
+              <div className="flex flex-col gap-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <InfoItem
+                    icon={<User className="w-5 h-5" />}
+                    label="Username"
+                    value={userdata.username ?? "Anonymous"}
+                  />
+                  <InfoItem
+                    icon={<Mail className="w-5 h-5" />}
+                    label="Email"
+                    value={user.email ?? "Anonymous"}
+                  />
+                  <InfoItem
+                    icon={<Phone className="w-5 h-5" />}
+                    label="Phone"
+                    value={userdata.phone_number ?? "Anonymous"}
+                  />
 
-                <InfoItem
-                  icon={<Calendar className="w-5 h-5" />}
-                  label="Joined"
-                  value={new Date(user.created_at).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                />
+                  <InfoItem
+                    icon={<Calendar className="w-5 h-5" />}
+                    label="Joined"
+                    value={new Date(user.created_at).toLocaleDateString(
+                      "en-US",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      }
+                    )}
+                  />
+                </div>
+
+                <form action={signOut} className="flex justify-center">
+                  <Button variant={"destructive"} className="w-1/2" type="submit">
+                    Sign Out
+                  </Button>
+                </form>
               </div>
             )}
           </CardContent>
