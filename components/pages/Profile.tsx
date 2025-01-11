@@ -21,7 +21,6 @@ export const Profile = async () => {
 
   try {
     const userdata = await getUserData(user.email);
-    console.log("This is user data", userdata);
 
     return (
       <div className="flex w-full px-4 h-[95%]">

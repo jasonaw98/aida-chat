@@ -10,12 +10,10 @@ export async function signInWithOTP(formData: FormData) {
   const email = {
     email: formData.get("email") as string,
   };
-  console.log('Sending OTP to:', email);
 
   const { data, error } = await supabase.auth.signInWithOtp({
     email: email.email,
   });
-  console.log("data", data, error);
 
   if (error) {
     console.log('error', error)
@@ -31,7 +29,6 @@ export async function verifyOTP(formData: FormData) {
     email: formData.get("email") as string,
     otp: formData.get("otp") as string,
   };
-  console.log("Verifying OTP for:", form);
 
 
   const { data: { session }, error, } = await supabase.auth.verifyOtp({
@@ -43,8 +40,6 @@ export async function verifyOTP(formData: FormData) {
   if (error) {
     redirect("/error");
   }
-
-  console.log(session);
 
   revalidatePath("/", "layout");
   redirect("/");

@@ -74,7 +74,7 @@ export async function uploadUserDetails(formData: FormData): Promise<any> {
   if (error) {
     console.error("Error fetching data:", error);
   }
-  console.log("Updated data", data);
+  // console.log("Updated data", data);
   redirect("/chatapp");
 }
 
