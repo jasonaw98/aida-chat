@@ -35,7 +35,7 @@ export const Profile = async () => {
                 <AvatarImage
                   src={`https://api.dicebear.com/6.x/initials/svg?seed=${userdata.username}`}
                 />
-                <AvatarFallback>{userdata.username.charAt(0)}</AvatarFallback>
+                <AvatarFallback>{user.email.charAt(0)}</AvatarFallback>
               </Avatar>
             </div>
           </CardHeader>

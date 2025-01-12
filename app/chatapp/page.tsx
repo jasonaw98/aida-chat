@@ -5,12 +5,19 @@ import { Profile } from "@/components/pages/Profile";
 import { TabsContent } from "@/components/ui/tabs";
 import { getUser } from "../(auth)/login/actions";
 import { redirect } from "next/navigation";
+import { getUserData } from "../actions/actions";
 
 const page = async () => {
   const { user } = await getUser();
   if (!user) {
     redirect("/");
   }
+
+  const userData = await getUserData(user.email!);
+  if (!userData.phone_number) {
+    redirect("/signup");
+  }
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex flex-col w-full h-full">

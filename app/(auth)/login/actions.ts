@@ -42,7 +42,7 @@ export async function verifyOTP(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/chatapp");
 }
 
 export async function signOut() {

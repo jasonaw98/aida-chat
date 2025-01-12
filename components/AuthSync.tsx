@@ -16,10 +16,10 @@ export default async function AuthSync() {
         if (error) {
           console.error("Error syncing user to database:", error);
         } else {
-          const userData = await getUserData(primaryEmail);
-          if (!userData.phone_number) {
-            return redirect("/signup");
-          }
+          // const userData = await getUserData(primaryEmail);
+          // if (!userData.phone_number) {
+          //   return redirect("/signup");
+          // }
         }
       }
     } catch (error) {
