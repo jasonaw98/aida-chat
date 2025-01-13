@@ -6,6 +6,7 @@ import { TabsContent } from "@/components/ui/tabs";
 import { getUser } from "../(auth)/login/actions";
 import { redirect } from "next/navigation";
 import { getUserData } from "../actions/actions";
+import AIzone from "@/components/pages/AIzone";
 
 const page = async () => {
   const { user } = await getUser();
@@ -21,6 +22,10 @@ const page = async () => {
   return (
     <div className="flex flex-col h-full">
       <div className="flex flex-col w-full h-full">
+        <TabsContent value="AI" className="flex w-full">
+          <AIzone/>
+        </TabsContent>
+
         <TabsContent value="chats" className="flex w-full">
           <Chats />
         </TabsContent>
@@ -29,7 +34,7 @@ const page = async () => {
           <Contacts />
         </TabsContent>
 
-        <TabsContent value="AI" className="p-2 h-full">
+        <TabsContent value="gradio" className="p-2 h-full">
           <EmbedPage />
         </TabsContent>
 

@@ -15,6 +15,12 @@ const TabListNav = () => {
       </div>
 
       <TabsList className="flex justify-evenly h-fit pb-5">
+        <TabsTrigger value="AI">
+          <div className="flex flex-col items-center">
+            <BrainIcon />
+            <p>Know AI</p>
+          </div>
+        </TabsTrigger>
         <TabsTrigger value="chats">
           <div className="flex flex-col items-center">
             <MessageCircleMoreIcon />
@@ -27,10 +33,10 @@ const TabListNav = () => {
             <p>Contacts</p>
           </div>
         </TabsTrigger>
-        <TabsTrigger value="AI">
+        <TabsTrigger value="gradio">
           <div className="flex flex-col items-center">
             <BrainIcon />
-            <p>Trusted AI</p>
+            <p>Raw AI</p>
           </div>
         </TabsTrigger>
         <TabsTrigger value="profile">

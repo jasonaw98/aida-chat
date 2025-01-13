@@ -5,7 +5,6 @@ import {
   getUserDetailsWithoutEmail,
 } from "@/app/actions/actions";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Card } from "./ui/card";
 import Link from "next/link";
@@ -46,8 +45,11 @@ export default function ChatList() {
     <div className="pt-4">
       {chatArray.map((chat, index) => (
         <Link href={`/chat/${chat.room_id}`}>
-          <Card className="p-2 rounded-none" key={index}>
-            <div key={chat.room_id} className="flex items-center justify-around">
+          <Card className="p-3 rounded-none" key={index}>
+            <div
+              key={chat.room_id}
+              className="flex items-center justify-around"
+            >
               <Avatar className="size-8">
                 <AvatarImage
                   src={`https://api.dicebear.com/6.x/initials/svg?seed=${chat.other_user.username}`}

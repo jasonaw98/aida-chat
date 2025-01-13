@@ -1,34 +1,13 @@
 import Link from "next/link";
-import ChatListCard from "../ChatListCard";
-import ShineBorder from "../ui/shine-border";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import ChatList from "../ChatList";
 
-const Chats = () => {
+export default function AIzone() {
   return (
     <div className="flex flex-col w-full">
       <h1 className="text-2xl pl-4 pb-2 text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400">
-        Chats
+        Knowledge AI
       </h1>
-      {/* <div className="flex gap-4 w-full px-8 py-4">
-        <Link href="/aida" className="w-full cursor-pointer">
-          <ShineBorder
-            className="font-bold text-lg border py-3 w-full rounded-xl shadow-inner shadow-white/20 text-center"
-            color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
-          >
-            AIDA
-          </ShineBorder>
-        </Link>
-        <Link href="/mahsuri" className="w-full cursor-pointer">
-          <ShineBorder
-            className="font-bold text-lg border py-3 w-full rounded-xl shadow-inner shadow-white/20 text-center"
-            color={["#37ecb9cb", "#0061fd", "#37ecb9cb"]}
-          >
-            Mahsuri
-          </ShineBorder>
-        </Link>
-      </div> */}
-{/* 
+
       <Link href="/aida" className="flex flex-col w-full">
         <span className="w-full h-px bg-gray-800"></span>
         <div className="flex px-8 py-4 w-full items-center">
@@ -91,13 +70,7 @@ const Chats = () => {
           </div>
         </div>
         <span className="w-full h-px bg-gray-800"></span>
-      </Link> */}
-
-      <div>
-        <ChatList />
-      </div>
+      </Link>
     </div>
   );
-};
-
-export default Chats;
+}
