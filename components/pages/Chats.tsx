@@ -2,7 +2,7 @@ import Link from "next/link";
 import ChatListCard from "../ChatListCard";
 import ShineBorder from "../ui/shine-border";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-
+import ChatList from "../ChatList";
 
 const Chats = () => {
   return (
@@ -93,6 +93,9 @@ const Chats = () => {
         <span className="w-full h-px bg-gray-800"></span>
       </Link>
 
+      <div>
+        <ChatList />
+      </div>
     </div>
   );
 };

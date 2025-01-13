@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Card } from "./ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import LoadingCircle from "@/components/LoadingCircle";
-
+import { useRouter } from 'next/navigation'
 
 interface ContactsType {
   userid: string;
@@ -57,6 +57,8 @@ export default function ContactsSection() {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setloading] = useState(false);
 
+  const router = useRouter()
+
   const handleSearch = useDebouncedCallback((query: string) => {
     const search = async () => {
       const text = await searchContacts(query);
@@ -68,18 +70,20 @@ export default function ContactsSection() {
     }
   }, 500);
 
-  const handleCreateChatRoom = async (contactUuid: string, contactName: string) => {
+  const handleCreateChatRoom = async (contactUuid: string) => {
     try {
       const  user = await getUserDetailsWithoutEmail();
       const loggedInUserUuid = user?.uuid;
-      const loggedInUserName = user?.username;
-      // console.log("loggedInUserUuid", loggedInUserUuid, loggedInUserName, contactUuid, contactName);
+      console.log("loggedInUserUuid", loggedInUserUuid, contactUuid);
 
-      //   if (loggedInUserUuid && loggedInUserName && contactUuid && contactName) {
-      //     const chatRoomUuid = await createChatRoom(loggedInUserUuid, loggedInUserName!, contactUuid, contactName);
-      //     console.log("Chat room created with UUID:", chatRoomUuid);
-      //     // Redirect to the chat room or update the UI as needed
-      //   }
+        if (loggedInUserUuid && contactUuid ) {
+          const chatRoomUuid = await createChatRoom(loggedInUserUuid, contactUuid);
+          if (chatRoomUuid) {
+            const chatroomID = chatRoomUuid[0].id;
+            console.log("Chat room created with UUID:", chatroomID);
+            router.push(`/chat/${chatroomID}`);
+          }
+        }
     } catch (error) {
       console.error("Error creating chat room:", error);
     }
@@ -101,7 +105,7 @@ export default function ContactsSection() {
           searchQuery !== "" &&
           Contactlist.map((contact, index) => {
             return (
-              <Card key={index} className="p-2" onClick={() => handleCreateChatRoom(contact.userid, contact.username)}>
+              <Card key={index} className="p-2" onClick={() => handleCreateChatRoom(contact.userid)}>
                 <div
                   key={contact.user_email}
                   className="flex items-center justify-around"
