@@ -12,7 +12,7 @@ export const Contacts = () => {
           <div className="flex justify-center"></div>
         </CardHeader>
         <CardContent>
-          <ContactsSection/>
+          <ContactsSection />
         </CardContent>
       </Card>
     </div>

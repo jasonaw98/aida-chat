@@ -2,6 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { getUser } from "../(auth)/login/actions";
 
 export async function createUser(email: string) {
   const supabase = createClient();
@@ -54,6 +55,15 @@ export async function getUserData(email: string) {
   return data;
 }
 
+export async function getUserDetailsWithoutEmail () {
+  const { user } = await getUser();
+  const userauthEmail = user?.email;
+
+  const userDetails = await getUserData(userauthEmail!);
+  // console.log("userDetails", userDetails);
+  return userDetails;
+}
+
 export async function uploadUserDetails(formData: FormData): Promise<any> {
   const email = formData.get("email") as string;
   const fullName = formData.get("full_name") as string;
@@ -61,15 +71,17 @@ export async function uploadUserDetails(formData: FormData): Promise<any> {
   const username = formData.get("username") as string;
 
   const supabase = createClient();
-  const { data, error } = await (await supabase)
-  .from("chat_users")
-  .update({
-    full_name: fullName,
-    phone_number: phoneNumber,
-    username: username,
-  })
-  .eq("user_email", email)
-  .select()
+  const { data, error } = await (
+    await supabase
+  )
+    .from("chat_users")
+    .update({
+      full_name: fullName,
+      phone_number: phoneNumber,
+      username: username,
+    })
+    .eq("user_email", email)
+    .select();
 
   if (error) {
     console.error("Error fetching data:", error);
@@ -85,14 +97,17 @@ export async function searchContacts(query: string) {
     .select("*")
     .order("created_at", { ascending: false })
     .or(
-      `phone_number.ilike.%${query}%, user_email.ilike.%${query}%, full_name.ilike.%${query}%, username.ilike.%${query}%`
+      `phone_number.ilike.%${query}%, full_name.ilike.%${query}%, username.ilike.%${query}%`
     );
 
   if (error) {
     console.error("Error fetching data:", error);
   }
 
+  // console.log("contacts", contacts);
+
   return contacts?.map((item) => ({
+    userid : item.uuid,
     user_email: item.user_email,
     username: item.username,
     phone_number: item.phone_number,
@@ -100,19 +115,25 @@ export async function searchContacts(query: string) {
   }));
 }
 
-export async function addFrens(userId: string, frenId: string) {
+export async function createChatRoom(user1Uuid: string, user1Username: string, user2Uuid: string, user2Username: string) {
   const supabase = createClient();
-  const { data, error } = await (await supabase).from("friendships").insert([
+  const { data, error } = await (await supabase)
+  .from("chat_room")
+  .insert([
     {
-      user_id: userId,
-      friend_id: frenId,
-      status: "pending",
+      user1_id: user1Uuid,
+      user1_username: user1Username,
+      user2_id: user2Uuid,
+      user2_username: user2Username
     },
-  ]);
+  ])
+  .select("id");
 
   if (error) {
     console.error("Error fetching data:", error);
   }
+
+  // console.log("create chat room data", data);
 
   return data;
 }
