@@ -78,6 +78,28 @@ export async function uploadUserDetails(formData: FormData): Promise<any> {
   redirect("/chatapp");
 }
 
+export async function searchContacts(query: string) {
+  const supabase = createClient();
+  const { data: contacts, error } = await (await supabase)
+    .from("chat_users")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .or(
+      `phone_number.ilike.%${query}%, user_email.ilike.%${query}%, full_name.ilike.%${query}%, username.ilike.%${query}%`
+    );
+
+  if (error) {
+    console.error("Error fetching data:", error);
+  }
+
+  return contacts?.map((item) => ({
+    user_email: item.user_email,
+    username: item.username,
+    phone_number: item.phone_number,
+    fullname: item.full_name,
+  }));
+}
+
 export async function addFrens(userId: string, frenId: string) {
   const supabase = createClient();
   const { data, error } = await (await supabase).from("friendships").insert([

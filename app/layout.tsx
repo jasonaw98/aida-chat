@@ -62,7 +62,7 @@ export default function RootLayout({
       <Script
         defer
         src="https://umami-analytics-gules.vercel.app/script.js"
-        // data-website-id="fe6e4139-17cc-4ae2-8813-49f5f99b79fa"
+        data-website-id="fe6e4139-17cc-4ae2-8813-49f5f99b79fa"
       />
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans h-full`}

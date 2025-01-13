@@ -14,7 +14,7 @@ const TabListNav = () => {
         <AdsSection />
       </div>
 
-      <TabsList className="flex justify-evenly h-fit pb-3">
+      <TabsList className="flex justify-evenly h-fit pb-5">
         <TabsTrigger value="chats">
           <div className="flex flex-col items-center">
             <MessageCircleMoreIcon />

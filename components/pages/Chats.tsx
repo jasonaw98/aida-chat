@@ -3,31 +3,13 @@ import ChatListCard from "../ChatListCard";
 import ShineBorder from "../ui/shine-border";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-const ChatData = [
-  {
-    name: "John Doe",
-    time: "10:00PM",
-    received_message: "Hello how can I help you?",
-    sent_message: "",
-  },
-  {
-    name: "Jane Doe",
-    time: "10:00PM",
-    received_message: "",
-    sent_message: "Hi",
-  },
-  {
-    name: "Jeff Doe",
-    time: "10:00PM",
-    received_message: "Hello",
-    sent_message: "",
-  },
-];
 
 const Chats = () => {
   return (
     <div className="flex flex-col w-full">
-      <h1 className="text-2xl pl-4 pb-2 text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400">Chats</h1>
+      <h1 className="text-2xl pl-4 pb-2 text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400">
+        Chats
+      </h1>
       {/* <div className="flex gap-4 w-full px-8 py-4">
         <Link href="/aida" className="w-full cursor-pointer">
           <ShineBorder
@@ -111,17 +93,6 @@ const Chats = () => {
         <span className="w-full h-px bg-gray-800"></span>
       </Link>
 
-      {/* {ChatData.map((data, index) => (
-        <Link href={`/chat/${data.name}`} key={index}>
-          <ChatListCard
-            key={index}
-            name={data.name}
-            time={data.time}
-            received_message={data.received_message}
-            sent_message={data.sent_message}
-          />
-        </Link>
-      ))} */}
     </div>
   );
 };
