@@ -44,7 +44,7 @@ export default function ChatList() {
   return (
     <div className="pt-4">
       {chatArray.map((chat, index) => (
-        <Link href={`/chat/${chat.room_id}`}>
+        <Link href={`/chat/${chat.room_id}`} key={chat.room_id}>
           <Card className="p-3 rounded-none" key={index}>
             <div
               key={chat.room_id}
