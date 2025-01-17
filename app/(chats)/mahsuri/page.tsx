@@ -39,7 +39,7 @@ export default function ChatPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://llm.zygy.com/stream-api/", {
+      const response = await fetch(process.env.NEXT_PUBLIC_ZYGY_AI_URL!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -106,13 +106,13 @@ export default function ChatPage() {
         <Link href="/chatapp" className="cursor-pointer">
           <ChevronLeftIcon className="w-6 h-6" />
         </Link>
-        <p className="text-2xl font-bold flex justify-start items-center h-full">
+        <p className="text-xl font-bold flex justify-start items-center h-full">
           Mahsuri
         </p>
       </CardHeader>
-      <CardContent className="overflow-auto h-[calc(100%-9rem)]">
+      <CardContent className="overflow-auto h-[calc(100%-8rem)] -mt-4">
         <div className="h-full">
-          <div className="space-y-4">
+          <div className="space-y-3">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -121,9 +121,9 @@ export default function ChatPage() {
                 }`}
               >
                 <div
-                  className={`max-w-[75%] rounded-lg p-2 overflow-auto ${
+                  className={`rounded-lg p-2 overflow-auto ${
                     message.role === "user"
-                      ? "bg-blue-500 text-white flex justify-end w-fit"
+                      ? "bg-blue-500 text-white flex justify-end w-fit max-w-[85%] "
                       : "bg-gray-700 text-gray-100 break-words"
                   }`}
                 >

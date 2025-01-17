@@ -3,16 +3,13 @@ import Marquee from "./ui/marquee";
 
 const reviews = [
   {
-    body: "Pamiran Kereta EV di...",
+    body: "Visit Melaka 2025",
   },
   {
-    body: "Message protected by Blockchain",
+    body: "Melaka Tourism 2025",
   },
   {
-    body: "Pamiran Kereta EV di...",
-  },
-  {
-    body: "Pamiran Kereta EV di...",
+    body: "Visit Malaysia 2025",
   },
 ];
 

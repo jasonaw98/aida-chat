@@ -37,11 +37,11 @@ body {
   } */
 
   :root {
-    --background: 224 71.4% 4.1%;
+    --background: 220.9 39.3% 11%;
     --foreground: 210 20% 98%;
-    --card: 224 71.4% 4.1%;
+    --card: 220.9 39.3% 11%;
     --card-foreground: 210 20% 98%;
-    --popover: 224 71.4% 4.1%;
+    --popover: 220.9 39.3% 11%;
     --popover-foreground: 210 20% 98%;
     --primary: 263.4 70% 50.4%;
     --primary-foreground: 210 20% 98%;
