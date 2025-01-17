@@ -13,6 +13,7 @@ import { ChevronLeftIcon } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import Image from "next/image";
 
 interface Message {
   role: "user" | "assistant";
@@ -113,6 +114,18 @@ export default function ChatPage() {
 
       <CardContent className="overflow-auto h-[calc(100%-8rem)] -mt-4">
         <div className="h-full">
+          {messages.length === 0 && (
+            <div className="font-bold flex justify-center h-full items-center flex-col gap-5">
+            <Image
+              src="/logomelaka.png"
+              alt="AIDA Icon"
+              width={200}
+              height={200}
+              className="opacity-80"
+            />
+            <h1 className="animate-pulse">How can I help you today?</h1>
+            </div>
+          )}
           <div className="space-y-3">
             {messages.map((message, index) => (
               <div
