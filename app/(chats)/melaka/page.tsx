@@ -9,7 +9,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ChevronLeftIcon } from "lucide-react";
+import { ChevronLeftIcon, SendHorizonal } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -18,6 +18,7 @@ import Image from "next/image";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  image?: string;
 }
 
 export default function ChatPage() {
@@ -29,6 +30,40 @@ export default function ChatPage() {
     setInput(e.target.value);
   };
 
+  const simulateStreaming = async (
+    response: string,
+    callback: (chunk: string) => void
+  ) => {
+    const chunks = response.split(" "); // Split response into words
+    let accumulatedText = "";
+
+    for (const chunk of chunks) {
+      accumulatedText += chunk + " "; // Add the word and a space
+      callback(accumulatedText.trim()); // Update the message with the accumulated text
+      await new Promise((resolve) => setTimeout(resolve, 40)); // Add a delay (e.g., 50ms)
+    }
+  };
+
+  const predefinedResponses: {
+    [key: string]: { content: string; image?: string };
+  } = {
+    "siapakah ketua menteri melaka skg ini": {
+      content:
+        "Ketua Menteri Melaka pada ketika ini ialah **YAB Datuk Seri Utama Ab Rauf bin Yusof** yang merupakan Ketua Menteri Melaka yang ke-13. Beliau telah dilantik pada 31 Mac 2023. \n\n\n Ketua Menteri akan menjalankan tanggungjawab dan fungsinya sebagai ketua kerajaan negeri selain memenuhi keperluan masyarakat, terutamanya didalam kawasannya",
+      image: "/ketuamenterimelaka.jpeg",
+    },
+    "saya lapar nk makan makanan yang halal sahaja": {
+      content:
+        "Ketua Menteri Melaka pada ketika ini ialah **YAB Datuk Seri Utama Ab Rauf bin Yusof** yang merupakan Ketua Menteri Melaka yang ke-13. Beliau telah dilantik pada 31 Mac 2023. \n\n\n Ketua Menteri akan menjalankan tanggungjawab dan fungsinya sebagai ketua kerajaan negeri selain memenuhi keperluan masyarakat, terutamanya didalam kawasannya",
+      image: "/ketuamenterimelaka.jpeg",
+    },
+    "aktiviti waktu malam di melaka apa yang best?": {
+      content:
+        "Ada banyak aktiviti waktu malam di Melaka. Contoh yang paling ramai lawati adalah Melaka River Cruise.\n\n[Melaka River Cruise](https://g.co/kgs/o1b7jCn)\n\nNak saya beri pilihan lain yang sesuai dengan minat anda?",
+      image: "/melakariver.jpeg", // Replace with actual image URL
+    },
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trim()) return;
@@ -38,6 +73,36 @@ export default function ChatPage() {
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
+
+    const lowerCaseInput = input.toLowerCase().trim();
+    if (predefinedResponses[lowerCaseInput]) {
+      // Add an empty assistant message to start streaming
+      const initialMessage: Message = {
+        role: "assistant",
+        content: "",
+        image: predefinedResponses[lowerCaseInput].image,
+      };
+      setMessages((prev) => [...prev, initialMessage]);
+
+      // Simulate streaming for the hardcoded response
+      await simulateStreaming(
+        predefinedResponses[lowerCaseInput].content,
+        (chunk) => {
+          setMessages((prev) => {
+            const newMessages = [...prev];
+            newMessages[newMessages.length - 1] = {
+              role: "assistant",
+              content: chunk,
+              image: predefinedResponses[lowerCaseInput].image,
+            };
+            return newMessages;
+          });
+        }
+      );
+
+      setIsLoading(false);
+      return; // Exit early, no need to call the API
+    }
 
     try {
       const response = await fetch(process.env.NEXT_PUBLIC_ZYGY_AI_URL!, {
@@ -52,7 +117,7 @@ export default function ChatPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to fetch response");
+        console.error(Error("Failed to fetch response"));
       }
 
       const reader = response.body?.getReader();
@@ -112,18 +177,18 @@ export default function ChatPage() {
         </p>
       </CardHeader>
 
-      <CardContent className="overflow-auto h-[calc(100%-8rem)] -mt-4">
+      <CardContent className="overflow-auto h-[calc(100%-8rem)] -mt-2">
         <div className="h-full">
           {messages.length === 0 && (
             <div className="font-bold flex justify-center h-full items-center flex-col gap-5">
-            <Image
-              src="/logomelaka.png"
-              alt="AIDA Icon"
-              width={200}
-              height={200}
-              className="opacity-80"
-            />
-            <h1 className="animate-pulse">How can I help you today?</h1>
+              <Image
+                src="/logomelaka.png"
+                alt="AIDA Icon"
+                width={200}
+                height={200}
+                className="opacity-80"
+              />
+              <h1 className="animate-pulse">How can I help you today?</h1>
             </div>
           )}
           <div className="space-y-3">
@@ -141,6 +206,17 @@ export default function ChatPage() {
                       : "bg-gray-700 text-gray-100 break-words"
                   }`}
                 >
+                  {message.image && (
+                    <div className="flex justify-center pb-1">
+                      <Image
+                        src={message.image}
+                        alt="AIDA Icon"
+                        width={250}
+                        height={200}
+                        className="rounded-xl"
+                      />
+                    </div>
+                  )}
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
@@ -217,10 +293,10 @@ export default function ChatPage() {
           />
           <Button
             type="submit"
-            className="bg-gray-300 text-slate-800 font-bold hover:bg-gray-400"
+            className="bg-gray-300 text-slate-800 hover:bg-gray-400"
             disabled={isLoading}
           >
-            Send
+            <SendHorizonal />
           </Button>
         </form>
       </CardFooter>

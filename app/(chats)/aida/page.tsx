@@ -9,7 +9,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ChevronLeftIcon } from "lucide-react";
+import { ChevronLeftIcon, SendHorizonal } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -51,7 +51,7 @@ export default function ChatPage() {
       });
 
       if (!response.ok) {
-        console.error('Fetch error:', response.status, response.statusText);
+        console.error("Fetch error:", response.status, response.statusText);
         throw new Error("Failed to fetch response");
       }
 
@@ -111,7 +111,7 @@ export default function ChatPage() {
           AIDA
         </p>
       </CardHeader>
-      <CardContent className="overflow-auto h-[calc(100%-8rem)] -mt-4">
+      <CardContent className="overflow-auto h-[calc(100%-8rem)] -mt-2">
         <div className="h-full">
           <div className="space-y-3">
             {messages.map((message, index) => (
@@ -204,10 +204,10 @@ export default function ChatPage() {
           />
           <Button
             type="submit"
-            className="bg-gray-300 text-slate-800 font-bold hover:bg-gray-400"
+            className="bg-gray-300 text-slate-800 hover:bg-gray-400"
             disabled={isLoading}
           >
-            Send
+            <SendHorizonal />
           </Button>
         </form>
       </CardFooter>
