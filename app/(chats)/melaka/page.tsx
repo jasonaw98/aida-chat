@@ -54,12 +54,12 @@ export default function ChatPage() {
     },
     "saya lapar nk makan makanan yang halal sahaja": {
       content:
-        "Ketua Menteri Melaka pada ketika ini ialah **YAB Datuk Seri Utama Ab Rauf bin Yusof** yang merupakan Ketua Menteri Melaka yang ke-13. Beliau telah dilantik pada 31 Mac 2023. \n\n\n Ketua Menteri akan menjalankan tanggungjawab dan fungsinya sebagai ketua kerajaan negeri selain memenuhi keperluan masyarakat, terutamanya didalam kawasannya",
-      image: "/ketuamenterimelaka.jpeg",
+        "1. Asam Pedas Selera Kampung Sdn Bhd\n\n Lokasi: [Asam Pedas Selera Kampung](https://g.co/kgs/AqwBpv6) \n\n Ini adalah beberapa contoh yang halal and disahkan oleh JAKIM Malaysia.",
+      image: "/asampedas.jpg",
     },
     "aktiviti waktu malam di melaka apa yang best?": {
       content:
-        "Ada banyak aktiviti waktu malam di Melaka. Contoh yang paling ramai lawati adalah Melaka River Cruise.\n\n[Melaka River Cruise](https://g.co/kgs/o1b7jCn)\n\nNak saya beri pilihan lain yang sesuai dengan minat anda?",
+        "Ada banyak aktiviti waktu malam di Melaka. Contoh yang paling ramai lawati adalah Melaka River Cruise.\n\n[Melaka River Cruise](https://g.co/kgs/o1b7jCn) [Buy Tickets Online](https://www.agoda.com/en-gb/activities/detail?activityId=1043867&cid=1909882&cityId=15121&currency=MYR&googleSrc=cu&gl=en&gacs=tpa&gad_source=1&gclid=Cj0KCQiA4rK8BhD7ARIsAFe5LXIl-zkri0Vwduu3v0eKh43Ku6TOgdfKqU4yDjOqSDBjcr3d6HV-iDEaAgWyEALw_wcB)\n\nNak saya beri pilihan lain yang sesuai dengan minat anda?",
       image: "/melakariver.jpeg", // Replace with actual image URL
     },
   };
@@ -76,6 +76,7 @@ export default function ChatPage() {
 
     const lowerCaseInput = input.toLowerCase().trim();
     if (predefinedResponses[lowerCaseInput]) {
+      await new Promise((resolve) => setTimeout(resolve, 1500)); // 1 second delay
       // Add an empty assistant message to start streaming
       const initialMessage: Message = {
         role: "assistant",
