@@ -1,19 +1,77 @@
+"use client";
 import { cn } from "@/lib/utils";
-import Marquee from "./ui/marquee";
+import { Marquee } from "./ui/marquee";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
-const reviews = [
+// Define the type for a review
+type Review = {
+  id: string;
+  body: string;
+  content: React.ReactNode; // React component for dialog content
+};
+
+// Extend the reviews array to include an id, body, and React component for content
+const reviews: Review[] = [
   {
-    body: "Visit Melaka 2025",
+    id: "visit-pahang",
+    body: "Visit Pahang 2025",
+    content: (
+      <span className="flex justify-center pt-2">
+        <iframe
+          src="https://www.youtube.com/embed/q5_S5r7yjSY"
+          width={"100%"}
+          height={200}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          loading="lazy"
+          className="rounded-lg"
+        ></iframe>
+      </span>
+    ),
   },
   {
-    body: "Melaka Tourism 2025",
+    id: "melaka-tourism-2026",
+    body: "Melaka Tourism 2026",
+    content: (
+      <span className="flex justify-center pt-2">
+        <iframe
+          src="https://www.youtube.com/embed/iy_hNq5dn0g"
+          width={"100%"}
+          height={200}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          loading="lazy"
+          className="rounded-lg"
+        ></iframe>
+      </span>
+    ),
   },
   {
-    body: "Visit Malaysia 2025",
+    id: "visit-malaysia-2026",
+    body: "Visit Malaysia 2026",
+    content: (
+      <span className="flex justify-center pt-2">
+        <iframe
+          src="https://www.youtube.com/embed/DoHXFXv7rv0"
+          width={"100%"}
+          height={200}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          loading="lazy"
+          className="rounded-lg"
+        ></iframe>
+      </span>
+    ),
   },
 ];
-
-const firstRow = reviews.slice(0, reviews.length / 2);
 
 const ReviewCard = ({ body }: { body: string }) => {
   return (
@@ -28,21 +86,42 @@ const ReviewCard = ({ body }: { body: string }) => {
         // "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
       )}
     >
-      <blockquote className="text-xl font-bold text-center text-neutral-200">{body}</blockquote>
+      <blockquote className="text-xl font-bold text-center text-neutral-200">
+        {body}
+      </blockquote>
     </figure>
   );
 };
 
 export function AdsSection() {
+  const [selectedReviewId, setSelectedReviewId] = useState<string | null>(null);
+
+  // Find the selected review based on the selectedReviewId
+  const selectedReview = reviews.find(
+    (review) => review.id === selectedReviewId
+  );
+
   return (
     <div className="relative flex w-full justify-center overflow-hidden rounded-lg md:shadow-xl">
-      <Marquee pauseOnHover className="[--duration:20s]">
-        {firstRow.map((review, i) => (
-          <ReviewCard key={i} {...review} />
-        ))}
-      </Marquee>
-      {/* <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div> */}
-      {/* <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div> */}
+      <Dialog>
+        <Marquee pauseOnHover className="[--duration:35s]">
+          {reviews.map((review, i) => (
+            <DialogTrigger
+              // asChild
+              key={i}
+              onClick={() => setSelectedReviewId(review.id)}
+            >
+              <ReviewCard key={i} {...review} />
+            </DialogTrigger>
+          ))}
+        </Marquee>
+        <DialogContent className="">
+          <DialogHeader>
+            <DialogTitle>{selectedReview?.body}</DialogTitle>
+            <DialogDescription>{selectedReview?.content}</DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
