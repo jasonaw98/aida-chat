@@ -220,7 +220,7 @@ export default function ChatPage() {
                       />
                     </div>
                   )}
-                  {message.image && (
+                  {message.video && (
                     <div className="flex justify-center pb-1">
                       <iframe
                         src="https://www.youtube.com/embed/0oFW3Xpp0Cs"
