@@ -114,17 +114,6 @@ export function AdsSection() {
               <ReviewCard key={i} {...review} />
             </DialogTrigger>
           ))}
-          <div className="flex justify-center pb-1">
-            <iframe
-              src="https://www.youtube.com/embed/0oFW3Xpp0Cs"
-              width={200}
-              height={100}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              loading="lazy"
-              className="rounded-lg"
-            ></iframe>
-          </div>
         </Marquee>
         <DialogContent className="">
           <DialogHeader>
