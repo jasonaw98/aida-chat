@@ -176,7 +176,7 @@ export default function ChatPage() {
           <ChevronLeftIcon className="w-6 h-6" />
         </Link>
         <p className="text-xl font-bold flex justify-start items-center h-full">
-          i-Melaka
+          i-Pahang
         </p>
       </CardHeader>
 
