@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full overflow-hidden">
       <head>
         <meta property="og:type" content="website" />
         <meta
@@ -65,11 +65,11 @@ export default function RootLayout({
         data-website-id="fe6e4139-17cc-4ae2-8813-49f5f99b79fa"
       />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans h-full`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans h-full overflow-hidden`}
       >
         <AuthSync />
         <LoadingScreen />
-        {children}
+        <div className="h-full overflow-y-auto">{children}</div>
       </body>
     </html>
   );
