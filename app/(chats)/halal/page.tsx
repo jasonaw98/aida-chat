@@ -76,7 +76,7 @@ export default function ChatPage() {
         const chunk = new TextDecoder().decode(value);
         accumulatedText += chunk;
 
-        await new Promise((resolve) => setTimeout(resolve, 10));
+        // await new Promise((resolve) => setTimeout(resolve, 10));
         // Update the last message with accumulated text
         setMessages((prev) => {
           const newMessages = [...prev];
