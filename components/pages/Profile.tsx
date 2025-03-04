@@ -27,7 +27,7 @@ export const Profile = async () => {
       <div className="flex w-full px-4 h-[95%]">
         <Card className="h-full w-full shadow-inner shadow-white/20">
           <CardHeader>
-            <CardTitle className="text-2xl text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400 -mt-2">
+            <CardTitle className="text-2xl text-transparent font-bold bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-400 -mt-2">
               Profile
             </CardTitle>
             <div className="flex justify-center">
@@ -105,7 +105,7 @@ function InfoItem({
 }) {
   return (
     <div className="flex items-center space-x-3 p-3 rounded-lg bg-secondary">
-      <div className="flex-shrink-0">{icon}</div>
+      <div className="shrink-0">{icon}</div>
       <div>
         <p className="text-sm font-medium text-muted-foreground">{label}</p>
         <p className="text-base font-semibold">{value}</p>

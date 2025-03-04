@@ -78,7 +78,7 @@ const ReviewCard = ({ body }: { body: string }) => {
     <figure
       className={cn(
         "relative w-fit cursor-pointer overflow-hidden rounded-xl border px-3 py-2",
-        "bg-gradient-to-br from-[#37ecb9cb] to-[#0061fd]",
+        "bg-linear-to-br from-[#37ecb9cb] to-[#0061fd]",
         "flex flex-row items-center justify-center"
         // light styles
         // "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
@@ -103,7 +103,12 @@ export function AdsSection() {
 
   return (
     <div className="relative flex w-full justify-center overflow-hidden rounded-lg md:shadow-xl">
-      <Dialog>
+      <Marquee pauseOnHover className="[--duration:10s]" style={{animationDuration: "10s"}}>
+        {reviews.map((review, i) => (
+          <ReviewCard key={i} {...review} />
+        ))}
+      </Marquee>
+      {/* <Dialog>
         <Marquee pauseOnHover className="[--duration:35s]">
           {reviews.map((review, i) => (
             <DialogTrigger
@@ -121,7 +126,7 @@ export function AdsSection() {
             <DialogDescription>{selectedReview?.content}</DialogDescription>
           </DialogHeader>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 }

@@ -268,7 +268,7 @@ const TextAnimate: FC<Props> = ({
       {...props}
     >
       {letters.map((letter, index) => (
-        <motion.span key={index} variants={child} className="text-3xl font-black text-center text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-500">
+        <motion.span key={index} variants={child} className="text-3xl font-black text-center text-transparent bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-500">
           {letter === " " ? "\u00A0" : letter}
         </motion.span>
       ))}

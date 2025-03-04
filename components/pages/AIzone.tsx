@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 export default function AIzone() {
   return (
     <div className="flex flex-col w-full">
-      <h1 className="text-2xl pl-4 pb-2 text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400">
+      <h1 className="text-2xl pl-4 pb-2 text-transparent font-bold bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-400">
         Knowledge AI
       </h1>
 

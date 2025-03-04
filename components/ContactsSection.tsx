@@ -36,7 +36,7 @@ const Search = ({
   };
 
   return (
-    <div className="flex flex-1 flex-shrink w-full">
+    <div className="flex flex-1 shrink w-full">
       <label htmlFor="search" className="sr-only">
         Search
       </label>

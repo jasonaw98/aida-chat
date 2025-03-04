@@ -48,7 +48,7 @@ export default function ChatList() {
           <Card className="p-3 rounded-none" key={index}>
             <div
               key={chat.room_id}
-              className="flex items-center justify-around"
+              className="flex items-center justify-between px-6"
             >
               <Avatar className="size-8">
                 <AvatarImage
@@ -59,8 +59,8 @@ export default function ChatList() {
                   {chat.other_user.username.charAt(0)}
                 </AvatarFallback>
               </Avatar>
-              <p>{chat.other_user.username}</p>
-              <p>{chat.other_user.fullname}</p>
+              {/* <p>{chat.other_user.username}</p> */}
+              <p className="flex justify-center w-full">{chat.other_user.fullname}</p>
             </div>
           </Card>
         </Link>

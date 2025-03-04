@@ -304,7 +304,7 @@ export default function ChatPage() {
             value={input}
             onChange={handleInputChange}
             placeholder="Type your message..."
-            className="flex-grow bg-gray-900 border border-gray-700"
+            className="grow bg-gray-900 border border-gray-700"
             disabled={isLoading}
           />
           <Button

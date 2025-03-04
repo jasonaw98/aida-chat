@@ -7,7 +7,7 @@ import ChatList from "../ChatList";
 const Chats = () => {
   return (
     <div className="flex flex-col w-full">
-      <h1 className="text-2xl pl-4 pb-2 text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400">
+      <h1 className="text-2xl pl-4 pb-2 text-transparent font-bold bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-400">
         Chats
       </h1>
       {/* <div className="flex gap-4 w-full px-8 py-4">

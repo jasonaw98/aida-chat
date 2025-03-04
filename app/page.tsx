@@ -15,10 +15,10 @@ export default async function Home() {
   return (
     <main className="flex flex-col items-center justify-center h-[95%]">
       <div className="flex flex-col items-center justify-center">
-        {/* <h1 className="text-4xl font-black text-center text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-500 mb-2">
+        {/* <h1 className="text-4xl font-black text-center text-transparent bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-500 mb-2">
           Welcome to
         </h1> */}
-        {/* <h1 className="text-3xl font-black text-center text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-500">
+        {/* <h1 className="text-3xl font-black text-center text-transparent bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-500">
           IDRead AI Messenger
         </h1> */}
         <div className="flex flex-col items-center justify-center gap-3">
@@ -44,7 +44,7 @@ export default async function Home() {
             </Button>
           </Link>
         </div>
-        <h1 className="text-base py-8 font-black text-center text-transparent bg-clip-text bg-gradient-to-br from-[#2af598] to-[#009efd] drop-shadow-lg">
+        <h1 className="text-base py-8 font-black text-center text-transparent bg-clip-text bg-linear-to-br from-[#2af598] to-[#009efd] drop-shadow-lg">
           <Link href="/chatapp">AI-powered messaging platform</Link>
         </h1>
       </div>

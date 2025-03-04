@@ -93,7 +93,7 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type your message..."
-            className="flex-grow dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
+            className="grow dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
           />
           <Button
             type="submit"

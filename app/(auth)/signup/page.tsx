@@ -9,7 +9,7 @@ export default async function page() {
 
   return (
     <div className="flex flex-col items-center p-10">
-      <h1 className="text-4xl text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400">
+      <h1 className="text-4xl text-transparent font-bold bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-400">
         Enter Your Details
       </h1>
       <form
