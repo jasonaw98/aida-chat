@@ -108,7 +108,7 @@ export default function ContactsSection() {
               <Card key={index} className="p-2" onClick={() => handleCreateChatRoom(contact.userid)}>
                 <div
                   key={contact.user_email}
-                  className="flex items-center justify-around"
+                  className="flex items-center justify-between pl-6"
                 >
                   <Avatar className="size-8">
                     <AvatarImage
@@ -119,8 +119,7 @@ export default function ContactsSection() {
                       {contact.username.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
-                  <p>{contact.username}</p>
-                  <p>{contact.fullname}</p>
+                  <p className="flex justify-start w-full pl-6 text-center">{contact.fullname}</p>
                 </div>
               </Card>
             );

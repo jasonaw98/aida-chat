@@ -103,12 +103,7 @@ export function AdsSection() {
 
   return (
     <div className="relative flex w-full justify-center overflow-hidden rounded-lg md:shadow-xl">
-      <Marquee pauseOnHover className="[--duration:10s]" style={{animationDuration: "10s"}}>
-        {reviews.map((review, i) => (
-          <ReviewCard key={i} {...review} />
-        ))}
-      </Marquee>
-      {/* <Dialog>
+      <Dialog>
         <Marquee pauseOnHover className="[--duration:35s]">
           {reviews.map((review, i) => (
             <DialogTrigger
@@ -126,7 +121,7 @@ export function AdsSection() {
             <DialogDescription>{selectedReview?.content}</DialogDescription>
           </DialogHeader>
         </DialogContent>
-      </Dialog> */}
+      </Dialog>
     </div>
   );
 }

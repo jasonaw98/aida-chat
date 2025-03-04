@@ -14,9 +14,11 @@ import { ChevronLeftIcon } from "lucide-react";
 import Link from "next/link";
 import {
   fetchMessages,
+  getChatRoomsInfo,
   getUserDetailsWithoutEmail,
   sendMessage,
 } from "@/app/actions/actions";
+import { createClient } from "@/utils/supabase/client";
 
 interface ChatMessages {
   text_message: string;
@@ -30,6 +32,7 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
   const [chatMessages, setchatMessages] = useState<ChatMessages[]>([]);
 
   const [userUuid, setuserUuid] = useState("");
+  const [userName, setuserName] = useState("");
 
   const fetchUserDetails = async () => {
     const logginUser = await getUserDetailsWithoutEmail();
@@ -37,6 +40,14 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
     setuserUuid(loggedInUserUuid);
     const fetchedMessages = await fetchMessages(id);
     setchatMessages(fetchedMessages);
+  };
+
+  const fetchChatRoomInfo = async () => {
+    const chatRoomInfo = await getChatRoomsInfo(id);
+    const chatUserName = chatRoomInfo?.full_name;
+    if (chatUserName) {
+      setuserName(chatUserName);
+    }
   };
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -48,6 +59,23 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
 
   useEffect(() => {
     fetchUserDetails();
+    fetchChatRoomInfo();
+    const supabase = createClient();
+    const channel = supabase
+      .channel("supabase_realtime")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "chat_messages" },
+        (payload) => {
+          // console.log("Change received!", payload);
+          fetchUserDetails();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      channel.unsubscribe();
+    };
   }, []);
 
   return (
@@ -56,23 +84,27 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
         <Link href="/chatapp" className="cursor-pointer">
           <ChevronLeftIcon className="w-6 h-6" />
         </Link>
-        <Avatar>
+        <Avatar className="size-8">
           <AvatarImage
-            src={`https://api.dicebear.com/6.x/initials/svg?seed=${id}`}
+            src={`https://api.dicebear.com/6.x/initials/svg?seed=${userName}`}
           />
-          <AvatarFallback>{id.charAt(0)}</AvatarFallback>
+          <AvatarFallback>{userName.charAt(0)}</AvatarFallback>
         </Avatar>
-        <h2 className="text-2xl font-bold dark:text-gray-100">{id.slice(0, 5)}</h2>
+        <h2 className="text-lg font-bold dark:text-gray-100">
+          {userName.slice(0, 10)}
+        </h2>
       </CardHeader>
       <CardContent className="overflow-auto h-[calc(100%-8rem)]">
         <div className="space-y-4">
           {chatMessages.map((message) => (
             <div
               key={message.created_at}
-              className={`flex ${message.sender_id === userUuid ? "justify-end" : "justify-start"}`}
+              className={`flex ${
+                message.sender_id === userUuid ? "justify-end" : "justify-start"
+              }`}
             >
               <div
-                className={`max-w-[70%] rounded-lg p-3 ${
+                className={`max-w-[70%] rounded-lg p-2 ${
                   message.sender_id === userUuid
                     ? "bg-blue-500 text-white"
                     : "bg-gray-700 text-gray-100"

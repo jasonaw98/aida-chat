@@ -201,7 +201,7 @@ export async function fetchMessages(chatroomid: string) {
   return messages;
 }
 
-export async function fetchChatRooms(useruuid : string) {
+export async function fetchChatRooms(useruuid: string) {
   const supabase = createClient();
   const { data: chatRooms, error: chatRoomsError } = await (await supabase)
     .from("chat_room")
@@ -220,7 +220,9 @@ export async function fetchChatRooms(useruuid : string) {
   });
 
   // Fetch details of the other users
-  const { data: contacts, error: contactsError } = await (await supabase)
+  const { data: contacts, error: contactsError } = await (
+    await supabase
+  )
     .from("chat_users")
     .select("*")
     .in("uuid", otherUserIds) // Filter by the other user IDs
@@ -233,21 +235,51 @@ export async function fetchChatRooms(useruuid : string) {
 
   // Map chat rooms with the other user's details
   const enrichedChatRooms = chatRooms.map((room) => {
-    const otherUserId = room.user1_id === useruuid ? room.user2_id : room.user1_id;
+    const otherUserId =
+      room.user1_id === useruuid ? room.user2_id : room.user1_id;
     const otherUserDetails = contacts.find((user) => user.uuid === otherUserId);
 
     return {
       room_id: room.id,
       // created_at: room.created_at,
-      other_user: otherUserDetails ? {
-        // userid: otherUserDetails.uuid,
-        // user_email: otherUserDetails.user_email,
-        username: otherUserDetails.username,
-        phone_number: otherUserDetails.phone_number,
-        fullname: otherUserDetails.full_name,
-      } : null,
+      other_user: otherUserDetails
+        ? {
+            // userid: otherUserDetails.uuid,
+            // user_email: otherUserDetails.user_email,
+            username: otherUserDetails.username,
+            phone_number: otherUserDetails.phone_number,
+            fullname: otherUserDetails.full_name,
+          }
+        : null,
     };
   });
 
   return enrichedChatRooms;
+}
+
+export async function getChatRoomsInfo(chatroomid: string) {
+  const supabase = createClient();
+  const { data: chatRoom, error } = await (await supabase)
+    .from("chat_room")
+    .select()
+    .eq("id", chatroomid)
+    .single();
+
+  if (error) {
+    console.error("Error fetching data:", error);
+  }
+
+  const user2Uuid = chatRoom?.user2_id;
+
+  const { data, error: userDataError } = await (await supabase)
+    .from("chat_users")
+    .select()
+    .eq("uuid", user2Uuid)
+    .single();
+
+  if (userDataError) {
+    console.error("Error fetching data:", userDataError);
+  }
+
+  return data;
 }

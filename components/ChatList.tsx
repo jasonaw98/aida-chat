@@ -48,19 +48,21 @@ export default function ChatList() {
           <Card className="p-3 rounded-none" key={index}>
             <div
               key={chat.room_id}
-              className="flex items-center justify-between px-6"
+              className="flex items-center justify-between px-7"
             >
-              <Avatar className="size-8">
+              <Avatar className="size-9">
                 <AvatarImage
                   src={`https://api.dicebear.com/6.x/initials/svg?seed=${chat.other_user.username}`}
-                  className="size-8 rounded-full"
+                  className="size-9 rounded-full"
                 />
                 <AvatarFallback>
                   {chat.other_user.username.charAt(0)}
                 </AvatarFallback>
               </Avatar>
               {/* <p>{chat.other_user.username}</p> */}
-              <p className="flex justify-center w-full">{chat.other_user.fullname}</p>
+              <p className="flex justify-start w-full pl-10">
+                {chat.other_user.fullname}
+              </p>
             </div>
           </Card>
         </Link>

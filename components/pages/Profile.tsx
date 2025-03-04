@@ -25,7 +25,7 @@ export const Profile = async () => {
 
     return (
       <div className="flex w-full px-4 h-[95%]">
-        <Card className="h-full w-full shadow-inner shadow-white/20">
+        <Card className="h-full w-full shadow-inner shadow-white/20 ">
           <CardHeader>
             <CardTitle className="text-2xl text-transparent font-bold bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-400 -mt-2">
               Profile
@@ -45,8 +45,8 @@ export const Profile = async () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <InfoItem
                     icon={<User className="w-5 h-5" />}
-                    label="Username"
-                    value={userdata.username ?? "Anonymous"}
+                    label="Name"
+                    value={userdata.full_name ?? "Anonymous"}
                   />
                   <InfoItem
                     icon={<Mail className="w-5 h-5" />}
@@ -74,7 +74,7 @@ export const Profile = async () => {
                 </div>
 
                 <form action={signOut} className="flex justify-center">
-                  <Button variant={"destructive"} className="w-1/2" type="submit">
+                  <Button variant={"destructive"} className="w-1/2 shadow-inner shadow-white/30" type="submit">
                     Sign Out
                   </Button>
                 </form>

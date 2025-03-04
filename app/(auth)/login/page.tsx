@@ -16,7 +16,7 @@ export default function LoginPage() {
   const [otpSent, setotpSent] = useState(false);
   const [setOtp, setSetOtp] = useState("");
   const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(false);
   const [loading, setloading] = useState(false);
 
   const handleInputChange = (newValue: string) => {
@@ -53,7 +53,7 @@ export default function LoginPage() {
           )}
         >
           <div className="flex flex-col items-center gap-8 w-1/2">
-            <h1 className="text-4xl text-transparent font-bold bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-400">
+            <h1 className="text-4xl text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400">
               Enter Your Email
             </h1>
             <form className="flex flex-col gap-8 items-center mt-4 w-full px-4">
@@ -64,8 +64,8 @@ export default function LoginPage() {
                 required
                 onChange={handleEmailChange}
                 className={cn(
-                  "w-full bg-linear-to-b from-zinc-800 to-zinc-900 text-lg rounded-sm px-2 py-1 focus:outline-hidden ring-2 ring-slate-700 focus:ring-slate-500 shadow-xl shadow-white/10",
-                  !isEmailValid && "ring-2 ring-red-500 focus:ring-red-500"
+                  "w-full bg-gradient-to-b from-zinc-800 to-zinc-900 text-lg rounded-sm px-2 py-1 focus:outline-none ring-1 ring-gray-700 focus:ring-blue-500 shadow-md shadow-white/10",
+                  !isEmailValid && "ring-2 ring-red-600 focus:ring-red-500"
                 )}
               />
               <Button
@@ -80,7 +80,7 @@ export default function LoginPage() {
           </div>
 
           <div className="flex flex-col items-center gap-8 w-1/2">
-            <h1 className="text-4xl text-transparent font-bold bg-clip-text bg-linear-to-b from-zinc-100 to-zinc-400">
+            <h1 className="text-4xl text-transparent font-bold bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-400">
               Enter Your OTP
             </h1>
             <form
