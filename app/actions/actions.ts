@@ -138,21 +138,8 @@ export async function createChatRoom(user1Uuid: string, user2Uuid: string) {
   return data;
 }
 
-export async function sendMessage(chatroomid: string, message: string) {
+export async function sendMessage(chatroomid: string, sender: string, message: string) {
   const supabase = createClient();
-  const { data: chatroomdata, error: chatroomerror } = await (await supabase)
-    .from("chat_room")
-    .select()
-    .eq("id", chatroomid)
-    .single();
-
-  if (chatroomerror) {
-    console.error("Error fetching data from chatroom db", chatroomerror);
-  }
-
-  console.log("chatroomdata", chatroomdata);
-  const sender = chatroomdata?.user1_id;
-  const receiver = chatroomdata?.user2_id;
 
   const { data: chatmessagedata, error: chatmessageerror } = await (
     await supabase
@@ -197,7 +184,7 @@ export async function fetchMessages(chatroomid: string) {
     sender_id: message.sender_id,
   }));
 
-  console.log("messages", formattedMessages);
+  // console.log("messagesdasd", formattedMessages);
   return messages;
 }
 
@@ -269,17 +256,31 @@ export async function getChatRoomsInfo(chatroomid: string) {
     console.error("Error fetching data:", error);
   }
 
+  const user1Uuid = chatRoom?.user1_id;
   const user2Uuid = chatRoom?.user2_id;
 
-  const { data, error: userDataError } = await (await supabase)
+  const { data: user1Data, error: user1DataError } = await (await supabase)
+    .from("chat_users")
+    .select()
+    .eq("uuid", user1Uuid)
+    .single();
+
+  if (user1DataError) {
+    console.error("Error fetching data:", user1DataError);
+  }
+
+  const { data:user2Data, error: user2DataError } = await (await supabase)
     .from("chat_users")
     .select()
     .eq("uuid", user2Uuid)
     .single();
 
-  if (userDataError) {
-    console.error("Error fetching data:", userDataError);
+  if (user2DataError) {
+    console.error("Error fetching data:", user2DataError);
   }
 
-  return data;
+  return {
+    user1: user1Data,
+    user2: user2Data,
+  };
 }

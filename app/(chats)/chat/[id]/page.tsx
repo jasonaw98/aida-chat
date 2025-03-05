@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, use, useEffect } from "react";
+import { useState, use, useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,16 +34,20 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
   const [userUuid, setuserUuid] = useState("");
   const [userName, setuserName] = useState("");
 
+  const lastMessageRef = useRef<HTMLDivElement | null>(null);
+
   const fetchUserDetails = async () => {
     const logginUser = await getUserDetailsWithoutEmail();
     const loggedInUserUuid = logginUser?.uuid;
     setuserUuid(loggedInUserUuid);
     const fetchedMessages = await fetchMessages(id);
+    console.log(fetchedMessages);
     setchatMessages(fetchedMessages);
   };
 
   const fetchChatRoomInfo = async () => {
-    const chatRoomInfo = await getChatRoomsInfo(id);
+    const { user1, user2 } = await getChatRoomsInfo(id);
+    const chatRoomInfo = user1.uuid === userUuid ? user2 : user1;
     const chatUserName = chatRoomInfo?.full_name;
     if (chatUserName) {
       setuserName(chatUserName);
@@ -52,10 +56,16 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    await sendMessage(id, newMessage);
+    await sendMessage(id, userUuid, newMessage);
     setNewMessage("");
     fetchUserDetails();
   };
+
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chatMessages]);
 
   useEffect(() => {
     fetchUserDetails();
@@ -96,12 +106,13 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
       </CardHeader>
       <CardContent className="overflow-auto h-[calc(100%-8rem)]">
         <div className="space-y-4">
-          {chatMessages.map((message) => (
+          {chatMessages.map((message, index) => (
             <div
               key={message.created_at}
               className={`flex ${
                 message.sender_id === userUuid ? "justify-end" : "justify-start"
               }`}
+              ref={index === chatMessages.length - 1 ? lastMessageRef : null}
             >
               <div
                 className={`max-w-[70%] rounded-lg p-2 ${
@@ -112,7 +123,14 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
               >
                 <p>{message.text_message}</p>
                 <span className="text-xs mt-1 block opacity-70">
-                  {new Date(message.created_at).toLocaleString()}
+                  {new Date(message.created_at).toLocaleString("en-US", {
+                    timeZone: "Asia/Kuala_Lumpur",
+                    day: "numeric",
+                    month: "short",
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  })}
                 </span>
               </div>
             </div>
