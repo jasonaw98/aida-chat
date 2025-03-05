@@ -41,7 +41,6 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
     const loggedInUserUuid = logginUser?.uuid;
     setuserUuid(loggedInUserUuid);
     const fetchedMessages = await fetchMessages(id);
-    console.log(fetchedMessages);
     setchatMessages(fetchedMessages);
   };
 
