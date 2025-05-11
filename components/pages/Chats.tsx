@@ -1,7 +1,7 @@
-import Link from "next/link";
-import ChatListCard from "../ChatListCard";
-import ShineBorder from "../ui/shine-border";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+// import Link from "next/link";
+// import ChatListCard from "../ChatListCard";
+// import ShineBorder from "../ui/shine-border";
+// import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import ChatList from "../ChatList";
 
 const Chats = () => {

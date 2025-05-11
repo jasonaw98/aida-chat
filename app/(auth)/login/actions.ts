@@ -1,5 +1,6 @@
 "use server";
 
+// import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/cloudserver";
@@ -16,6 +17,11 @@ export async function signInWithOTP(formData: FormData) {
   });
 
   if (error) {
+    console.log('error', error)
+    redirect("/error");
+  }
+
+  if (!data) {
     console.log('error', error)
     redirect("/error");
   }
@@ -40,6 +46,10 @@ export async function verifyOTP(formData: FormData) {
   if (error) {
     redirect("/error");
   }
+  if (!session) {
+    console.log('No session', error)
+    redirect("/error");
+  }
 
   revalidatePath("/", "layout");
   redirect("/chatapp");
@@ -54,6 +64,9 @@ export async function signOut() {
 export async function getUser() {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
-  // console.log("data", data, error);
+  if (error) {
+    console.log('error', error)
+    redirect("/error");
+  }
   return data;
 }
